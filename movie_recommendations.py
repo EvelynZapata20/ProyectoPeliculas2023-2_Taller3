@@ -8,7 +8,7 @@ import numpy as np
 _ = load_dotenv('openAI.env')
 openai.api_key  = os.environ['openAI_api_key']
 
-with open('movie_descriptions.json', 'r') as file:
+with open('movie_descriptions_embeddings.json', 'r') as file:
     file_content = file.read()
     movies = json.loads(file_content)
 
@@ -18,7 +18,7 @@ emb = get_embedding(movies[1]['description'],engine='text-embedding-ada-002')
 print(emb)
 
 #Vamos a crear una nueva llave con el embedding de la descripción de cada película en el archivo .json
-
+"""
 for i in range(len(movies)):
   emb = get_embedding(movies[i]['description'],engine='text-embedding-ada-002')
   movies[i]['embedding'] = emb
@@ -30,6 +30,7 @@ with open('movie_descriptions_embeddings.json', 'r') as file:
     movies = json.loads(file_content)
 
 print(movies[0])
+"""
 
 #Para saber cuáles películas se parecen más, podemos hacer lo siguiente:
 print(movies[27]['title'])
@@ -56,5 +57,3 @@ for i in range(len(movies)):
 sim = np.array(sim)
 idx = np.argmax(sim)
 print(movies[idx]['title'])
-
-
